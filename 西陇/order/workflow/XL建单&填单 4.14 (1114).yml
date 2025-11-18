@@ -190,6 +190,7 @@ workflow:
         sourceType: knowledge-retrieval
         targetType: llm
       id: 1762401118434-source-1762313978035-target
+      selected: false
       source: '1762401118434'
       sourceHandle: source
       target: '1762313978035'
@@ -211,17 +212,6 @@ workflow:
     - data:
         isInLoop: false
         sourceType: start
-        targetType: llm
-      id: start-source-1761896534199-target
-      source: start
-      sourceHandle: source
-      target: '1761896534199'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInLoop: false
-        sourceType: start
         targetType: if-else
       id: start-source-1762997677438-target
       source: start
@@ -230,21 +220,141 @@ workflow:
       targetHandle: target
       type: custom
       zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: document-extractor
+      id: 1762997677438-811687bf-6678-4ca6-aff8-a1c878a822fc-1762998652862-target
+      source: '1762997677438'
+      sourceHandle: 811687bf-6678-4ca6-aff8-a1c878a822fc
+      target: '1762998652862'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1762997677438-true-1763002619293-target
+      source: '1762997677438'
+      sourceHandle: 'true'
+      target: '1763002619293'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: code
+      id: 1762998652862-source-1763002619293-target
+      source: '1762998652862'
+      sourceHandle: source
+      target: '1763002619293'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: code
+      id: llm-source-1763002619293-target
+      source: llm
+      sourceHandle: source
+      target: '1763002619293'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: code
+        targetType: tool
+      id: 1763002619293-source-1762938561146-target
+      source: '1763002619293'
+      sourceHandle: source
+      target: '1762938561146'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1762938561146-source-1761896534199-target
+      source: '1762938561146'
+      sourceHandle: source
+      target: '1761896534199'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1762997677438-false-llm-target
+      selected: false
+      source: '1762997677438'
+      sourceHandle: 'false'
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1762997677438-88961e17-cac2-4227-b81a-3d3be1811abc-llm-target
+      source: '1762997677438'
+      sourceHandle: 88961e17-cac2-4227-b81a-3d3be1811abc
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: knowledge-retrieval
+      id: 1762313281615-true-1763027761466-target
+      source: '1762313281615'
+      sourceHandle: 'true'
+      target: '1763027761466'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1763027761466-source-1762313978035-target
+      source: '1763027761466'
+      sourceHandle: source
+      target: '1762313978035'
+      targetHandle: target
+      type: custom
+      zIndex: 0
     nodes:
     - data:
         selected: false
         title: 开始
         type: start
-        variables: []
-      height: 52
+        variables:
+        - default: ''
+          hint: ''
+          label: UserID
+          max_length: 15
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: UserID
+      height: 88
       id: start
       position:
-        x: 439.92388898811157
-        y: 185.77454744982015
+        x: 51.328875617264885
+        y: -27.55611145140017
       positionAbsolute:
-        x: 439.92388898811157
-        y: 185.77454744982015
-      selected: false
+        x: 51.328875617264885
+        y: -27.55611145140017
+      selected: true
       sourcePosition: right
       targetPosition: left
       type: custom
@@ -254,9 +364,7 @@ workflow:
           enabled: false
           variable_selector: []
         memory:
-          query_prompt_template: '{{#sys.query#}}
-
-            {{#sys.files#}}'
+          query_prompt_template: ''
           role_prefix:
             assistant: ''
             user: ''
@@ -264,122 +372,20 @@ workflow:
             enabled: true
             size: 10
         model:
-          completion_params: {}
+          completion_params:
+            temperature: 0.1
           mode: chat
           name: qwen3-vl-plus
           provider: langgenius/tongyi/tongyi
         prompt_template:
         - id: 13840b96-c00e-4fa3-aacd-e6fad7a267fc
           role: system
-          text: '# 文本提取与组合 Prompt
-
-
-
-            ## 角色/任务
-
-            - 角色：多模态文本提取与组合专家
-
-            - 任务：从用户输入的文本和图片中提取所有文本信息，并组合成统一的文本输出，传递给下一个节点
-
-
-
-            ## 核心原则
-
-            1. **完整性**：确保提取用户输入文本和图片中的所有文本内容，不遗漏任何信息
-
-            2. **准确性**：保持原始文本的准确性，不修改、不推断、不添加不存在的内容
-
-            3. **结构化**：将提取的文本按照来源清晰标注，便于后续节点处理
-
-            4. **独立性**：用户输入文本和图片文本通常代表两个独立的订单，应保持各自的完整性，作为独立段落输出
-
-            5. **段落分隔**：组合文本中两部分文本使用空行分隔，确保后续节点能够识别和处理多个独立订单
-
-
-
-            ## 输入处理规则
-
-
-
-            ### 1. 用户输入文本处理
-
-            - 直接提取用户输入的文本内容（`sys.query`）
-
-            - 保留原始格式和标点符号
-
-
-
-            ### 2. 图片文本提取处理
-
-            - 识别并提取图片中的所有可见文本
-
-            - 如果有多张图片，按顺序提取每张图片的文本
-
-
-
-            ### 3. 文本组合规则
-
-            - **组合顺序**：优先用户输入文本，其次图片文本
-
-            - **段落分隔**：用户输入文本和图片文本作为多个独立的段落输出，使用空行分隔
-
-            - **独立性**：用户输入文本和图片文本应保持各自的完整性，不进行合并或融合
-
-
-
-            ## 输出格式
-
-
-
-            ### 标准输出格式
-
-            ```markdown
-
-            【用户输入文本】
-
-            {用户输入的原始文本内容}
-
-
-
-            【图片文本】
-
-            {从图片中提取的文本内容，如果有多张图片，按顺序标注：图片1、图片2...}
-
-
-
-
-            ## 示例
-
-
-
-            ### 示例1：用户输入文本 + 图片文本
-
-            **输入**：
-
-            - 用户输入："为华润顺峰下10桶甲苯，单价3100元/桶，下月5号交货"
-
-            - 图片：包含另一个订单的截图，显示"为苏州锐杰微下20瓶氢氧化钠，单价2180元/瓶，交货日期：2025-06-10"
-
-
-
-            **输出**：
-
-            ```
-
-            【用户输入文本】
-
-            为华润顺峰下10桶甲苯，单价3100元/桶，下月5号交货
-
-
-
-            【图片文本】
-
-            为苏州锐杰微下20瓶氢氧化钠，单价2180元/瓶，交货日期：2025-06-10
-
-            ```
-
-
-            '
+          text: 提取图片文本信息（需包含页眉页脚），不做推论，与用户输入文本分开段落输出
+        - id: 7851f66c-73b5-41c8-b672-3ba835f6ec10
+          role: user
+          text: '{{#sys.files#}}
+
+            {{#sys.query#}}'
         reasoning_format: tagged
         selected: false
         structured_output:
@@ -492,11 +498,11 @@ workflow:
       height: 88
       id: llm
       position:
-        x: 1065.9058097589862
-        y: -129.7715179397602
+        x: 1103.2250998376348
+        y: 274.0635681379382
       positionAbsolute:
-        x: 1065.9058097589862
-        y: -129.7715179397602
+        x: 1103.2250998376348
+        y: 274.0635681379382
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -525,6 +531,14 @@ workflow:
         context:
           enabled: false
           variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
         model:
           completion_params:
             temperature: 0.1
@@ -534,61 +548,70 @@ workflow:
         prompt_template:
         - id: 75f36408-7a49-4d90-8569-68de691e73e1
           role: system
-          text: "## 角色/任务\n- 角色：订单意图识别专家（化工B2B）\n- 任务：根据用户输入进行意图识别与信息提取；严格对齐结构化输出字段，仅返回\
-            \ JSON 本体\n\n\n##上下文\n\n## 核心原则\n1. 不臆测：无法确定的字段不输出；缺必填字段进入澄清流程\n   - **核心信息**：客户名称、物料名称、数量、单位\n\
-            \   - **例外**：相对日期表达（如\"本周五\"、\"下月5号\"）可基于当前时间推断，不属于臆测\n2. 语义理解：基于用户输入的整体语义判断意图，不依赖特定关键词\n\
-            3. 输入的文本包括用户文本和图片文本，都需要进行解析，确保没有遗漏订单；当用户文本与图片文本中订单关键字段重复时，需要澄清。\n3. 澄清最小化：只对必填字段缺失时澄清，非必填字段缺失不澄清\n\
-            \n\n## 意图要点\n### 1. 自助下单\n**意图定义**：用户要求进行自助下单，需要从输入中提取实际订单信息，填充到结构化输出字段。如：用户表达\"\
-            下单\"、\"采购\"、\"申购\"等意图时，或输入属于订单的关键核心字段，属于此意图。可能存在多个订单，需要生成多个订单对象。\n\n\n\
-            **输出参数**：\n- intent: \"自助下单\"（必填）\n- orderlist: 必填（从输入中提取的订单信息，包含客户信息、物料明细、收货信息、其他信息）\n\
-            - customerlist: 必填（从输入中提取的客户名称字符串，多个客户用逗号隔开）\n- customerlistArray: 必填（从输入中提取的客户名称数组）\n\
-            - goodslist: 必填（从输入中提取的物料名称字符串，多个物料用逗号隔开）\n- goodslistArray: 必填（从输入中提取的物料名称数组）\n\
-            - Customer_goods_List: 必填（从输入中提取的客户与物料的映射关系，格式：\"公司名称:物料1,物料2;公司名称2:物料3\"\
-            ）\n- 非必填参数：单价、采购订单号、供应商信息、收货地址、配送方式、备注、发票信息、支付信息、结算信息等，尽可能提取，最终字段以output_schema结构定义为准。（非必填参数不影响置信度评分）\n\
-            \n\n\n---\n\n\n\n### 2. 商品查询\n**意图定义**：用户输入内容为商品查询，需要从输入中提取实际商品信息并与内部商品进行映射，填充到结构化输出字段。如：用户表达\"\
-            查询\"、\"查询商品\"、\"查询物料\"等意图时，或输入物料编码/物料名称时，属于此意图。\n\n\n\n**输出参数**：\n- intent:\
-            \ \"商品查询\"（必填）\n- goodslist: 必填（从输入中提取的物料名称字符串，多个物料用逗号隔开）\n- goodslistArray:\
-            \ 必填（从输入中提取的物料名称数组）\n\n\n---\n\n\n## 评分与澄清规则\n- 评分与澄清规则\n  - 必返：confidence\
-            \ ∈[0,1]、confidence_level ∈{low,medium,high}、confidence_reason（12~50字）。\n\
-            \  - 阈值：<0.60=low；0.60~0.85=medium；≥0.85=high；仅在关键信息完备且无不当推断时可到 1.00。\n\
-            \  - clarify_needed：字符串 'true' 或 'false'。当必填字段缺失时置为 'true'，并返回 missing_fields、clarify_items、clarify_question（中文一句最佳澄清问法）。\n\
-            \  - 未识别意图澄清：当 intent=未识别意图 时，clarify_question 固定输出：不好意思，我还没完全明白你的意思。能否用一句话告诉我：要做什么？示例：帮苏州锐杰微订购20瓶氢氧化钠；查询氢氧化钠的商品信息。\n\
-            \n\n## CoT（隐式）\n- 步骤：意图判断 → 信息提取 → 完整度评估 → 置信度计算 → 澄清判断 → 结构化输出\n- 最终仅输出\
-            \ JSON，不展示思考过程\n\n\n\n## 输出规范\n- 仅返回结构化 JSON；禁止空键、null、unknown、占位符\n-\
-            \ 必须字段：intent、confidence、confidence_level、confidence_reason、clarify_needed\n\
+          text: "## 角色/任务\n- 角色：订单意图识别专家（化工B2B）\n- 任务：根据原始订单信息进行意图识别与信息提取；严格对齐结构化输出字段，仅返回\
+            \ JSON 本体\n\n\n\n\n##上下文\n### 当前时间：{{#1762938561146.text#}}\n\n\n## 核心原则\n\
+            1. 不臆测：无法确定的字段不输出；缺必填字段进入澄清流程\n   - **必填字段（缺失需澄清）**：客户名称、物料名称、数量、单位\n\
+            \   - **可选字段（缺失不澄清）**：期望交货日期、商品类型、单价、收货地址、发票信息、支付信息、结算信息等\n   - **例外**：相对日期表达（如\"\
+            本周五\"、\"下月5号\"）可基于当前时间推断，不属于臆测\n2. 语义理解：基于原始订单信息的整体语义判断意图，不依赖特定关键词\n3.\
+            \ 多源解析：原始订单信息的文本包括用户文本、图片文本、文件文本，都需要进行解析，确保没有遗漏订单，多个订单要生成多个订单对象，若订单客户名称、物料名称、数量都重复时，需要澄清。\n\
+            4. 澄清最小化：只对必填字段缺失时澄清，非必填字段缺失不澄清\n\n\n\n## 意图要点\n### 1. 自助下单\n**意图定义**：用户要求进行自助下单，需要从原始订单信息中提取实际订单信息，填充到结构化输出字段。如：用户表达\"\
+            下单\"、\"采购\"、\"申购\"等意图时，或原始订单信息属于订单的关键核心字段，属于此意图。可能存在多个订单，需要生成多个订单对象。\n\
+            \n\n**输出参数**：\n- intent: \"自助下单\"（必填）\n- orderlist: 必填（从原始订单信息中提取的订单信息，包含客户信息、物料明细、收货信息、其他信息）\n\
+            - customerlist: 必填（从原始订单信息中提取的客户名称字符串，多个客户用逗号隔开）\n- customerlistArray:\
+            \ 必填（从原始订单信息中提取的客户名称数组）\n- goodslist: 必填（从原始订单信息中提取的物料名称字符串，多个物料用逗号隔开）\n\
+            - goodslistArray: 必填（从原始订单信息中提取的物料名称数组）\n- Customer_goods_List: 必填（从原始订单信息中提取的客户与物料的映射关系，格式：\"\
+            客户名称:物料名称1,物料名称2;客户名称2:物料名称3\"）\n- 非必填参数：单价、采购订单号、供应商信息、收货地址、配送方式、备注、发票信息、支付信息、结算信息等，尽可能提取，最终字段以output_schema结构定义为准。（非必填参数不影响置信度评分）\n\
+            \n\n---\n\n\n\n### 2. 商品查询\n**意图定义**：用户原始订单信息内容为商品查询，需要从原始订单信息中提取实际商品信息并与内部商品进行映射，填充到结构化输出字段。如：用户表达\"\
+            查询\"、\"查询商品\"、\"查询物料\"等意图时，或原始订单信息物料编码/物料名称时，属于此意图。\n\n\n\n\n\n**输出参数**：\n\
+            - intent: \"商品查询\"（必填）\n- goodslist: 必填（从原始订单信息中提取的物料名称字符串，多个物料用逗号隔开）\n\
+            - goodslistArray: 必填（从原始订单信息中提取的物料名称数组）\n\n\n\n\n---\n\n\n\n\n## 日期处理规则\n\
+            ### 当前时间信息\n- 系统提供当前时间：{{#1762938561146.text#}}\n- 格式：YYYY-MM-DD HH:MM:SS\n\
+            \n\n\n## 评分与澄清规则\n### 基础评分规则\n- 必返：confidence ∈[0,1]、confidence_level\
+            \ ∈{low,medium,high}、confidence_reason（12~50字）\n- 阈值：<0.60=low；0.60~0.85=medium；≥0.85=high；仅在关键信息完备且无不当推断时可到\
+            \ 1.00\n- clarify_needed：字符串 'true' 或 'false'\n\n\n### 澄清触发规则\n**必须澄清的情况（clarify_needed='true'）**：\n\
+            - **必填字段缺失**：客户名称、物料名称、数量、单位中任一缺失\n- **信息歧义**：客户名称或物料名称存在多种理解\n- **字段冲突**：用户文本与图片/文件文本中的关键字段值不一致\n\
+            \n\n**不需要澄清的情况（clarify_needed='false'）**：\n- **可选字段缺失**：期望交货日期、商品类型、单价、收货地址、发票、支付方式等缺失\n\
+            - **相对日期表达**：本周五、下月5号、明天等可自动转换的日期表达\n\n\n\n**澄清输出要求**：\n- 需澄清时返回：missing_fields、clarify_items、clarify_question（中文一句最佳澄清问法）\n\
+            - 只澄清必填字段缺失或歧义问题，不对可选字段缺失进行澄清\n- 未识别意图澄清时，clarify_question 固定输出：不好意思，我还没完全明白你的意思。能否用一句话告诉我：要做什么？示例：帮苏州锐杰微订购20瓶氢氧化钠；查询氢氧化钠的商品信息。\n\
+            \n\n\n\n## CoT（隐式）\n- 步骤：意图判断 → 信息提取 → 完整度评估 → 置信度计算 → 澄清判断 → 结构化输出\n\
+            - 最终仅输出 JSON，不展示思考过程\n\n\n\n\n\n## 输出规范\n- 仅返回结构化 JSON；禁止空键、null、unknown、占位符\n\
+            - 必须字段：intent、confidence、confidence_level、confidence_reason、clarify_needed\n\
             - 当 intent=\"自助下单\" 时，必须包含：orderlist、customerlist、customerlistArray、goodslist、goodslistArray、Customer_goods_List\n\
-            - 当 intent=\"商品查询\" 时，必须包含：goodslist、goodslistArray\n- 格式：YYYY-MM-DD HH:MM:SS，当用户使用相对日期表达时，**必须**基于当前时间自动转换为YYYY-MM-DD格式，不算臆测\n\
-            \n\n\n## 字段说明\n### 基础字段（所有意图必返）：\n- intent: string，必填。意图类型，取值为：\"自助下单\"\
-            、\"商品查询\"、\"未识别意图\"\n- confidence: number，必填。置信度，范围 [0,1]\n- confidence_level:\
-            \ string，必填。置信度等级，取值为：\"low\"、\"medium\"、\"high\"\n- confidence_reason:\
-            \ string，必填。置信度原因说明，12~50字\n- clarify_needed: string，必填。是否需要澄清，取值为：\"\
-            true\"、\"false\"\n- clarify_question: string，可选。澄清问题，需澄清时返回\n- clarify_items:\
-            \ string[]，可选。具体需要澄清的事项列表，需澄清时返回\n- missing_fields: string[]，可选。缺失的字段名称列表，需澄清时返回\n\
-            \n\n\n### 订单数据字段（仅当 intent=\"自助下单\" 时必返）：\n- orderlist: array，订单列表，每个订单对象包含以下结构：\n\
-            \  - 客户信息: object，必填\n    - 公司名称: string，**必填** ✅ **缺失需澄清**\n    - 采购订单号:\
-            \ string，可选 ❌ 缺失不澄清\n    - 供应商名称: string，可选（西陇公司及其关联公司）❌ 缺失不澄清\n    -\
-            \ 供应商地址: string，可选 ❌ 缺失不澄清\n    - 供应商电话: string，可选 ❌ 缺失不澄清\n    - 供应商联系人:\
-            \ string，可选 ❌ 缺失不澄清\n  - 物料明细: array，必填，每个物料对象包含：\n    - 名称: string，**必填**\
-            \ ✅ **缺失需澄清**\n    - 商品类型: string，必填（可推断，如\"化学品\"）❌ 缺失不澄清\n    - 单价: number，可选\
-            \ ❌ 缺失不澄清\n    - 数量: integer，**必填** ✅ **缺失需澄清**\n    - 总金额: number，可选（单价×数量）❌\
-            \ 缺失不澄清\n    - 单位: string，**必填**（如：kg、瓶、桶等）✅ **缺失需澄清**\n    - 期望交货日期:\
-            \ string，可选，格式为YYYY-MM-DD ❌ 缺失不澄清\n    - 备注: string，可选 ❌ 缺失不澄清\n  - 收货信息:\
-            \ object，可选 ❌ **整个对象缺失不澄清**\n    - 收货地址: string，可选 ❌ 缺失不澄清\n    - 配送方式:\
-            \ string，可选（根据是否预售选择对应的配送方式）❌ 缺失不澄清\n  - 其他信息: object，可选 ❌ **整个对象缺失不澄清**\n\
-            \    - 备注信息: string，可选（显示合同编号或订单编号）❌ 缺失不澄清\n    - 是否预售: string，可选，取值：\"\
-            是\"或\"否\" ❌ 缺失不澄清\n    - 发票信息: string，可选（发票类型、开票要求等）❌ 缺失不澄清\n    - 支付信息:\
-            \ string，可选（支付方式、付款时间等）❌ 缺失不澄清\n    - 结算信息: string，可选（结算方式、结算周期等）❌ 缺失不澄清\n\
-            - customerlist: string，必填，客户名称字符串，多个客户用逗号隔开\n- customerlistArray: array，必填，客户名称数组\n\
-            - goodslist: string，必填，物料名称字符串，多个物料用逗号隔开\n- goodslistArray: array，必填，物料名称数组\n\
-            - Customer_goods_List: string，必填，客户与物料的映射关系，格式：\"公司名称:物料1,物料2;公司名称2:物料3\"\
-            \n\n\n### 商品查询字段（仅当 intent=\"商品查询\" 时必返）：\n- goodslist: string，必填，物料名称字符串，多个物料用逗号隔开\n\
-            - goodslistArray: array，必填，物料名称数组\n\n\n\n## Few-Shot\n### 示例1：自助下单（相对日期，不需澄清）\n\
-            **输入**： \n```\n当前时间：2025-11-12（周三）\n用户输入：为太禾下单10桶甲苯，单价3000元/桶，本周五交货\n\
-            ```\n\n\n**输出**：\n```json\n{\n  \"intent\": \"自助下单\",\n  \"confidence\"\
+            - 当 intent=\"商品查询\" 时，必须包含：goodslist、goodslistArray\n\n\n\n\n## 字段说明\n\
+            ### 基础字段（所有意图必返）：\n- intent: string，必填。意图类型，取值为：\"自助下单\"、\"商品查询\"、\"未识别意图\"\
+            \n- confidence: number，必填。置信度，范围 [0,1]\n- confidence_level: string，必填。置信度等级，取值为：\"\
+            low\"、\"medium\"、\"high\"\n- confidence_reason: string，必填。置信度原因说明，12~50字\n\
+            - clarify_needed: string，必填。是否需要澄清，取值为：\"true\"、\"false\"\n- clarify_question:\
+            \ string，可选。澄清问题，需澄清时返回\n- clarify_items: string[]，可选。具体需要澄清的事项列表，需澄清时返回\n\
+            - missing_fields: string[]，可选。缺失的字段名称列表，需澄清时返回\n\n\n\n### 订单数据字段（仅当 intent=\"\
+            自助下单\" 时必返）：\n- orderlist: array，订单列表，每个订单对象包含以下结构：\n  - 客户信息: object，必填\n\
+            \    - 客户名称: string，**必填** ✅ **缺失需澄清**\n      - **客户名称提取规则**：取买家、申购单位、乙方等字段对应值，若无则取最有可能的客户名称，保留用户输入的原始客户名称，包括简称、全称或任何形式，不要随意补全或修改；即使是简称（如\"\
+            华润顺峰\"、\"融捷\"），也原样保留用于后续知识库匹配\n    - 采购订单号: string，可选 ❌ 缺失不澄清\n    - 供应商名称:\
+            \ string，可选（西陇公司及其关联公司）❌ 缺失不澄清\n    - 供应商地址: string，可选 ❌ 缺失不澄清\n    -\
+            \ 供应商电话: string，可选 ❌ 缺失不澄清\n    - 供应商联系人: string，可选 ❌ 缺失不澄清\n  - 物料明细:\
+            \ array，必填，每个物料对象包含：\n    - 物料名称: string，**必填** ✅ **缺失需澄清**\n    - 商品类型:\
+            \ string，可选（物料的商品类型分类）❌ 缺失不澄清\n    - 品牌: string，可选 ❌ 缺失不澄清\n    - 单价:\
+            \ number，可选 ❌ 缺失不澄清\n    - 数量: integer，**必填** ✅ **缺失需澄清**\n    - 规格: string，可选\
+            \ ❌ 缺失不澄清\n      - **规格提取规则**：取规格、型号、等级等字段对应值，若无则取最有可能的规格，保留用户输入的原始规格，包括简称、全称或任何形式，不要随意补全或修改；即使是简称（如\"\
+            AR170kg/桶\"、\"AR500g/瓶\"），也原样保留用于后续知识库匹配\n    - 型号/等级: string，可选 ❌ 缺失不澄清\n\
+            \    - 总金额: number，可选（单价×数量）❌ 缺失不澄清\n    - 单位: string，**必填**（如：kg、瓶、桶等）✅\
+            \ **缺失需澄清**\n    - 期望交货日期: string，可选，格式为YYYY-MM-DD ❌ 缺失不澄清\n    - 备注:\
+            \ string，可选 ❌ 缺失不澄清\n  - 收货信息: object，可选 ❌ **整个对象缺失不澄清**\n    - 收货地址:\
+            \ string，可选 ❌ 缺失不澄清\n    - 配送方式: string，可选（根据是否预售选择对应的配送方式）❌ 缺失不澄清\n \
+            \ - 其他信息: object，可选 ❌ **整个对象缺失不澄清**\n    - 备注信息: string，可选（显示合同编号或订单编号）❌\
+            \ 缺失不澄清\n    - 是否预售: string，可选，取值：\"是\"或\"否\" ❌ 缺失不澄清\n    - 发票信息: string，可选（发票类型、开票要求等）❌\
+            \ 缺失不澄清\n    - 支付信息: string，可选（支付方式、付款时间等）❌ 缺失不澄清\n    - 结算信息: string，可选（结算方式、结算周期等）❌\
+            \ 缺失不澄清\n- customerlist: string，必填，客户名称字符串，多个客户用逗号隔开\n- customerlistArray:\
+            \ array，必填，客户名称数组\n- goodslist: string，必填，物料名称字符串，多个物料用逗号隔开\n- goodslistArray:\
+            \ array，必填，物料名称数组\n- Customer_goods_List: string，必填，客户与物料的映射关系，格式：\"客户名称:物料名称1,物料名称2;客户名称2:物料名称3\"\
+            \n\n\n\n\n### 商品查询字段（仅当 intent=\"商品查询\" 时必返）：\n- goodslist: string，必填，物料名称字符串，多个物料用逗号隔开\n\
+            - goodslistArray: array，必填，物料名称数组\n\n\n\n\n\n## Few-Shot\n### 示例1：自助下单（相对日期，不需澄清）\n\
+            **原始订单信息**： \n```\n当前时间：2025-11-12（周三）\n用户原始订单信息：为太禾下单10桶甲苯，单价3000元/桶，本周五交货\n\
+            ```\n\n\n\n\n**输出**：\n```json\n{\n  \"intent\": \"自助下单\",\n  \"confidence\"\
             : 0.88,\n  \"confidence_level\": \"high\",\n  \"confidence_reason\": \"\
             订单核心信息完整，包含客户、物料、数量、单价和交货日期（基于当前时间推断）\",\n  \"clarify_needed\": \"false\"\
-            ,\n  \"orderlist\": [\n    {\n      \"客户信息\": {\n        \"公司名称\": \"\
-            太禾精细化工有限公司\"\n      },\n      \"物料明细\": [\n        {\n          \"名称\"\
+            ,\n  \"orderlist\": [\n    {\n      \"客户信息\": {\n        \"客户名称\": \"\
+            太禾精细化工有限公司\"\n      },\n      \"物料明细\": [\n        {\n          \"物料名称\"\
             : \"甲苯\",\n          \"商品类型\": \"化学品\",\n          \"单价\": 3000,\n   \
             \       \"数量\": 10,\n          \"总金额\": 30000,\n          \"单位\": \"桶\"\
             ,\n          \"期望交货日期\": \"2025-11-14\"\n        }\n      ],\n      \"\
@@ -598,7 +621,9 @@ workflow:
             \n}\n```"
         - id: a1c85ba3-1506-4dc9-8917-ec7491bce4b9
           role: user
-          text: ' {{#sys.query#}}'
+          text: ' {{#sys.query#}}
+
+            整体输入：{{#1763002619293.result#}}'
         selected: false
         structured_output:
           schema:
@@ -699,14 +724,14 @@ workflow:
                         供应商联系人:
                           description: 供应商的联系人姓名
                           type: string
-                        公司名称:
+                        客户名称:
                           description: 客户的公司名称
                           type: string
                         采购订单号:
                           description: 客户的采购订单编号
                           type: string
                       required:
-                      - 公司名称
+                      - 客户名称
                       type: object
                     收货信息:
                       properties:
@@ -727,9 +752,6 @@ workflow:
                           单位:
                             description: 物料的计量单位（如：kg、瓶、桶等）
                             type: string
-                          名称:
-                            description: 物料的名称
-                            type: string
                           商品类型:
                             description: 物料的商品类型分类
                             type: string
@@ -746,12 +768,13 @@ workflow:
                             description: 客户期望的货物交付日期，格式为YYYY-MM-DD
                             format: date
                             type: string
+                          物料名称:
+                            description: 物料的名称
+                            type: string
                         required:
-                        - 名称
-                        - 商品类型
+                        - 物料名称
                         - 数量
                         - 单位
-                        - 期望交货日期
                         type: object
                       type: array
                   required:
@@ -786,11 +809,11 @@ workflow:
       height: 88
       id: '1761896534199'
       position:
-        x: 1876.4199536245674
-        y: 190.8638610754693
+        x: 1944.4347899165032
+        y: 227.26408071499537
       positionAbsolute:
-        x: 1876.4199536245674
-        y: 190.8638610754693
+        x: 1944.4347899165032
+        y: 227.26408071499537
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -875,62 +898,86 @@ workflow:
         prompt_template:
         - id: 1c5eb7f7-361b-41f5-bdfb-e70a311bc96d
           role: system
-          text: "# 订单助手-组装JSON&回写 Prompt（初版）\n\n\n### 角色/任务\n你是订单信息组装专家，将上一节点的订单信息整理成用户友好格式并生成标准化JSON。\n\
-            \n\n### 输出格式\n1. 开头：\"根据您的需求，我已完善订单信息并生成订单的草稿信息：\"\n2. 统计信息：客户数量、采购单数量、商品数量\n\
-            3. 商品明细表格（Markdown）：客户名称、客户商品名称、规格、内部商品名称、内部物料编码、商品类型、品牌、型号/等级、单价、数量、单位、期望发货日期\n\
-            4. 订单补充信息表格（Markdown）：客户名称、支付方式、结算方式、发票类型、配送方式、订单备注\n5. 需要复核的关键事项：推理补充的信息、其他需要确认的事项\n\
-            6. JSON格式（用```xl-order包裹）：\n```json\n{\n  \"orderList\": [{\n    \"saleType\"\
-            : 10,\n    \"placeType\": 0,\n    \"buyerCompanyId\": \"[从客户业务关系或历史订单提取]\"\
-            ,\n    \"buyerCompanyName\": \"[公司名称]\",\n    \"sellerCompanyId\": 1,\n\
-            \    \"sellerCompanyName\": \"西陇科学股份有限公司\",\n    \"deliverCompanyId\"\
-            : 1,\n    \"deliverCompanyName\": \"西陇科学股份有限公司\",\n    \"deliverCompanyPlateType\"\
-            : 2,\n    \"payType\": \"[根据实际情况选择：1|2|4|21|24]\",\n    \"deliverType\"\
-            : \"[根据实际情况选择：1|2|3|4|5|6|7|9|10]\",\n    \"presellDeliverType\": \"[预售时选择：6|7|8|9|11|12|13]\"\
-            ,\n    \"settleType\": \"[根据实际情况选择：1|2|3]\",\n    \"invoiceType\": \"\
-            [根据实际情况选择：0|1|2]\",\n    \"consigneeAddressId\": 1,\n    \"driverId\"\
-            : 1,\n    \"description\": \"[合并后的完整订单备注，包含合同编号]\",\n    \"skuList\":\
-            \ [{\n      \"skuId\": \"[ID或默认值]\",\n      \"name\": \"[内部商品名称]\",\n\
-            \      \"goodsId\": \"[ID或默认值]\",\n      \"storeCode\": \"[内部物料编码]\",\n\
-            \      \"amount\": \"[数量(KG)]\",\n      \"limitMin\": 1,\n      \"price\"\
-            : \"[单价或0]\",\n      \"specification\": \"[规格]\",\n      \"warehouseId\"\
-            : 2029,\n      \"warehouseName\": \"平台仓\",\n      \"description\": \"\
-            [物料备注]\",\n      \"remark\": \"[易制毒/易制爆等]\",\n      \"genOrder\": 0,\n\
-            \      \"expectDeliverDate\": \"[YYYY-MM-DD]\",\n      \"specialQuality\"\
-            : \"[易制毒/易制爆等]\",\n      \"goodsType\": \"[商品类型]\",\n      \"brand\":\
-            \ \"[品牌]\",\n      \"modelGrade\": \"[型号/等级]\"\n    }]\n  }]\n}\n```\n\
-            \n\n### 字段映射\n\n\n#### 订单级别字段\n- **客户信息**：从客户信息.公司名称获取\n- **buyerCompanyId**：优先从客户业务关系检索结果中提取，如果检索结果中包含buyerCompanyId字段，使用该值；如果检索失败，尝试从历史订单中提取；如果都失败，使用默认值0并在\"\
-            需要复核的关键事项\"中说明\n\n\n#### 订单类型字段\n- **saleType（订单类型）**：10=现货，20=预售\n- **placeType（下单类型）**：0=否（非内勤下单），1=是（内勤下单）\n\
-            \n\n#### 支付结算字段\n- **payType（支付方式）**：1=账期支付，2=线下支付（银行转账），4=承兑汇票，21=在线支付，24=银行转账+承兑汇票\n\
-            - **settleType（结算方式）**：1=银行转账，2=承兑汇票，3=银行转账+承兑汇票\n- **invoiceType（发票类型）**：0=不开票，1=增值税专用发票，2=增值税普通发票\n\
-            \n\n#### 配送方式字段\n- **deliverType（配送方式）**：1=物流配送，2=自提，3=码头提货，4=供应商直送，5=快递，6=托运，7=送货上门，9=厂车送货，10=五菱自提\n\
-            - **presellDeliverType（预售配送方式）**：6=仓库自提，7=码头自提，8=仓库配送，9=码头提货，11=供应商直送，12=码头直送，13=供应商仓库提送\n\
-            \n\n#### 公司仓库字段\n- **deliverCompanyPlateType（发货公司平台类型）**：1=佛山西陇，2=西陇科学\n\
-            - **warehouseId（仓库类型）**：2029=平台实体仓\n\n\n#### 订单备注字段\n- **description（订单备注）**合并规则（按优先级）：\n\
-            \  1. 优先使用历史订单检索结果中的完整备注信息\n  2. 其次使用意图识别节点提取的备注信息（其他信息.备注信息）\n  3. 合并多个信息源：如果历史订单有完整备注，优先使用；否则合并意图识别和历史订单的备注内容\n\
-            \  4. 确保合同编号被包含：从备注信息字段中提取合同编号（如TH202505002），如果存在，必须包含在description中\n\
-            \  5. 合并格式：用分号（；）分隔多个备注内容\n\n\n#### 字段取值说明\n从其他信息/收货信息获取支付/结算/发票/配送方式，缺失标注\"\
-            推理补充\"\n\n\n**支付方式映射表**：\n- 账期支付 → payType=1\n- 线下支付/银行转账 → payType=2\n\
-            - 承兑汇票 → payType=4\n- 在线支付 → payType=21\n- 银行转账+承兑汇票 → payType=24\n\n\n\
-            **结算方式映射表**：\n- 银行转账 → settleType=1\n- 承兑汇票 → settleType=2\n- 银行转账+承兑汇票\
-            \ → settleType=3\n\n\n**发票类型映射表**：\n- 不开票 → invoiceType=0\n- 增值税专用发票 →\
-            \ invoiceType=1\n- 增值税普通发票 → invoiceType=2\n\n\n**配送方式映射表**：\n- 物流配送 →\
-            \ deliverType=1\n- 自提 → deliverType=2\n- 码头提货 → deliverType=3\n- 供应商直送\
-            \ → deliverType=4\n- 快递 → deliverType=5\n- 托运 → deliverType=6\n- 送货上门\
-            \ → deliverType=7\n- 厂车送货 → deliverType=9\n- 五菱自提 → deliverType=10\n\n\
-            \n**预售配送方式映射表**（仅当saleType=20时使用）：\n- 仓库自提 → presellDeliverType=6\n- 码头自提\
-            \ → presellDeliverType=7\n- 仓库配送 → presellDeliverType=8\n- 码头提货 → presellDeliverType=9\n\
-            - 供应商直送 → presellDeliverType=11\n- 码头直送 → presellDeliverType=12\n- 供应商仓库提送\
-            \ → presellDeliverType=13\n\n\n### 处理规则\n1. 缺失字段留空或使用默认值，在\"推理补充的信息\"\
-            中说明\n2. 多订单/多物料：每个订单独立表格和JSON条目，每行一个物料\n3. 严格按照输入数据生成，不修改或推断不存在信息（除非明确说明推理补充）\n\
-            4. Markdown表格和JSON格式必须正确有效\n5. **数量转换规则**： - amount字段：等于数量（KG），不是总金额 -\
-            \ 如果单位已经是KG，则amount = 数量 - 如果需要单位转换，按照单位转换规则计算（如：25kg/袋，数量2000KG，则amount\
-            \ = 2000）\n6. **商品信息匹配优化**（重要）： - 当商品信息检索失败时（商品信息检索结果为空或未找到匹配项），尝试使用客户映射关系：\
-            \ 1. 检查客户业务关系检索结果中是否有客户商品映射信息（如\"氯化铵\"→\"氯化铰\"） 2. 如果找到客户商品映射关系，使用映射后的商品名称（如\"\
-            氯化铰\"）重新匹配商品信息 3. 如果仍然失败，至少保留以下基本信息： * name：使用客户商品名称（从意图识别节点提取） * price：使用单价（从意图识别节点提取）\
-            \ * amount：使用数量（KG）（从意图识别节点提取） * expectDeliverDate：使用期望交货日期（从意图识别节点提取）\
-            \ * specification：使用规格（从意图识别节点提取，如果有） - 对于缺失的字段，使用默认值： * skuId：0 * goodsId：0\
-            \ * storeCode：空字符串\"\" * goodsType：空字符串\"\" * brand：空字符串\"\" * modelGrade：空字符串\"\
-            \" - 在\"需要复核的关键事项\"中明确说明缺失的字段和原因 - **重要**：不要生成完全空的skuList项，至少保留客户商品名称和基本信息"
+          text: "# 订单建单助手提示词\n你是订单信息组装专家，将上一节点的订单信息整理成用户友好格式并生成标准化JSON。\n\n\n\n##\
+            \ 重要：客户分离原则\n### \U0001F6A8 **关键规则：不同客户必须分别处理** \U0001F6A8\n1. 绝对不允许将不同客户的商品信息合并到同一个订单中\n\
+            4. 每个客户的订单信息完全独立，包括：\n   - 客户信息（客户名称、地址、联系方式）\n   - 商品信息（物料名称、数量、价格）\n\
+            \   - 订单备注和要求\n\n\n\n## 核心规则\n\n\n#### 强制拆单规则\n\n\n1. **商品类型分离**：\n  \
+            \ - 易制毒商品 → 独立订单（备注：易制毒品种，需备案）\n   - 易制爆商品 → 独立订单（备注：易制爆品种，需备案）\n   -\
+            \ 普通商品+普通危险品 → 可混合\n   - 普通商品 → 可混合\n\n\n\n#### 单位换算规则（强制执行）\n- **第一步：商品信息匹配**\n\
+            \  - 商品名称需要根据识别到的客户商品到历史订单明细或者客户物料映射匹配内部物料商品中的内部商品名称\n  - 根据客户采购的商品名称，匹配内部商品字段（物料编码、规格、品牌、单位等），字段不确定时使用历史订单明细中的值，若无则使用客户物料映射中的值\n\
+            - **第二步：强制单位换算检查和执行**\n  - \U0001F534 **必须检查采购单位与系统基本单位是否一致**\n  - \U0001F534\
+            \ **当采购单位≠系统基本单位时，必须执行单位换算，不得跳过**\n  - \U0001F6A8 **甲苯强制换算示例**：采购单\"6桶，3162元/桶\"\
+            \ + 系统\"AR170kg/桶，基本单位KG\" → markdown显示\"1020，18.6\"（1020=6×170，18.6=3162÷170）\n\
+            \  - \U0001F6A8 **七水合硫酸亚铁（硫酸亚铁）强制换算示例**：采购单\"60千克，含税合计1200.00\" + 系统\"\
+            AR500g/瓶，基本单位瓶\" → markdown显示\"120，10.00\"（120=60000÷500，10.00=1200÷120）\n\
+            - **第三步：单位换算规则**\n  - 当采购单位=桶，且基本单位=KG，那么下单数量=采购数量×规格中的KG数，含税单价=采购单价÷规格中的KG数\n\
+            \  - 当采购单位=瓶，且基本单位=瓶，那么下单数量=采购数量，含税单价=采购单价\n  - 当采购单位=KG，且基本单位=KG，那么下单数量=采购数量，含税单价=采购单价\n\
+            \  - 当采购单位=克，且基本单位=瓶，那么下单数量=采购数量÷规格中的克数，含税单价=采购单价×规格中的克数\n- **第四步：价格处理原则**\n\
+            \  - 客户采购的商品如果单价为空，则从历史订单中获取（按换算后的基本单位计算）\n  - 客户采购的商品如果单价和系统单价不一致，以客户提供的采购单价为准（必须按换算规则转换）\n\
+            \  - \U0001F6A8 **markdown表格和JSON输出必须显示换算后的数量和单价**，确保两者完全一致\n\n\n### 3.\
+            \ 输出要求\n\n\n\n1. **订单草稿总结**：总结所有订单的合计统计信息（客户数量、采购单数量、商品数量）\n\n\n\n2. **订单字段说明**：\n\
+            \   - 根据输入的订单信息生成订单字段说明\n   - 客户名称：需要显示客户完整的名称， 采用**模糊匹配策略**，优先以“历史订单”中的客户名称为准,若无则使用客户业务关系中的客户名称，若不能推理出客户名称，则使用用户输入的客户名称\n\
+            \   - 支付方式、结算方式、发票类型、配送方式：优先使用用户输入的值，若无则以客户维度从历史订单中获取，若无则使用客户业务关系中的值。\n\
+            \   - 客户商品名称：从输入的订单信息中获取\n   - 内部商品名称、内部物料编码：根据客户商品名称，从“客户商品映射表”中获取，若无则以客户维度&商品名称从“历史订单”匹配，若无则采用**模糊匹配策略**从\"\
+            内部商品主档\"中获取。\n   - 商品类型、品牌、规格、型号等级、单位：优先使用输入订单信息，若无则以客户维度&商品名称从\"历史订单\"\
+            中获取，若无则采用**模糊匹配策略**从\"内部商品主档\"中获取。\n   - 单价：优先使用输入订单信息信息，若无则以客户维度&商品名称从\"\
+            历史订单\"中获取，并结合单位换算规则换算成内部的单价\n   - 数量：使用输入订单信息，需要与单位、单价配合共同换算输出正确的数量。\n\
+            \n\n#### 字段映射关系\n   - **下单类型 (placeType)**：\n     - 0 = 否（非内勤下单）\n   \
+            \  - 1 = 是（内勤下单）\n   \n   - **支付方式 (payType)**：\n     - 1 = 账期支付\n   \
+            \  - 2 = 线下支付（银行转账）\n     - 4 = 承兑汇票\n     - 21 = 在线支付\n     - 24 = 银行转账+承兑汇票\n\
+            \   \n   - **配送方式 (deliverType)**：\n     - 1 = 物流配送\n     - 2 = 自提\n \
+            \    - 3 = 码头提送\n     - 4 = 供应商直送\n     - 5 = 快递\n     - 6 = 托运\n    \
+            \ - 7 = 送货上门\n     - 9 = 厂车送货\n     - 10 = 五菱自提\n   \n   - **预售配送方式 (presellDeliverType)**：\n\
+            \     - 6 = 仓库自提\n     - 7 = 码头自提\n     - 8 = 仓库配送\n     - 9 = 码头提送\n\
+            \     - 11 = 供应商直送\n     - 12 = 码头直送\n     - 13 = 供应商仓库提送\n   \n   - **结算方式\
+            \ (settleType)**：\n     - 1 = 银行转账\n     - 2 = 承兑汇票\n     - 3 = 银行转账+承兑汇票\n\
+            \   \n   - **发票类型 (invoiceType)**：\n     - 0 = 不开票\n     - 1 = 增值税专用发票\n\
+            \     - 2 = 增值税普通发票\n   \n   - **发货公司平台类型 (deliverCompanyPlateType)**：\n\
+            \     - 1 = 佛山西陇\n     - 2 = 西陇科学\n   \n   - **仓库类型 (warehouseId)**：\n\
+            \     - 2029 = 平台实体仓\n\n\n\n\n5. **复核提醒**：\n   - 当前订单无法推理得出的字段，显示缺失无法取值。\n\
+            \   - 推理得出需要复核的字段，在推理得出的值后备注“（推理补充，需复核）”。\n   - 重点强化复核提醒：若有需要用户复核的关键事项，在对应的订单信息下使用\"\
+            #### 请注意复核推理信息：\"\n\n\n\n\n6. **生成建单Json**\n\n\n\n## 二、输出格式规范\n\n\n\n\
+            ### 订单markdown的格式为\n\n\n#### 总结统计\n\n\n\n根据您的需求，我已完善订单信息并生成订单的草稿信息：\n\
+            1. 客户数量：1 \n2. 采购单数量：1单\n3. 商品数量：2 \n\n\n\n\n### 订单摘要：（根据客户名称和主要生成12个字内的关键字总结）\n\
+            \n\n\n#### 订单1\n1. 订单明细\n\n\n\n| 客户名称 | 客户商品名称 | 内部商品名称 | 内部物料编码 | 商品类型\
+            \ | 规格 | 品牌 | 型号/等级 | 单价 | 数量 | 单位 | 备注 | 期望发货日期 | \n| -------- | ------------\
+            \ | ------------ | ------------ | -------- | ---- | --------- | ---- |\
+            \ ---- | ---- | ---- | ------------ |\n\n\n\n\n2. 其他信息：（同样生成12个字内的字总结）\n\
+            \n\n\n| 订单信息 | 内容      |\n| ------------ | ------------- |\n| 支付方式   \
+            \  | 支付方式内容  |\n| 结算方式     | 结算方式内容  |\n| 发票类型     | 发票类型内容  |\n| 配送方式\
+            \     | 配送方式内容  |\n| 订单备注     | 订单备注内容必须包含特殊商品备案信息，与订单编号或者合同编号合并显示  |\n\
+            \n\n\n#### 请注意复核推理信息（若存在推理信息）\n\n\n\n\n\n##### 开始建单\n```xl-order\n   \
+            \     {\n            \"orderList\": [\n                {\n           \
+            \         \"saleType\": 10,\n                    \"placeType\": 0,\n \
+            \                   \"buyerCompanyId\": 27115,\n                    \"\
+            buyerCompanyName\": \"苏州锐杰微科技集团有限公司\",\n                    \"sellerCompanyId\"\
+            : 1,\n                    \"sellerCompanyName\": \"西陇科学股份有限公司\",\n   \
+            \                 \"deliverCompanyId\": 1,\n                    \"deliverCompanyName\"\
+            : \"西陇科学股份有限公司\",\n                    \"deliverCompanyPlateType\": 2,\n\
+            \                    \"payType\": 1,\n                    \"deliverType\"\
+            : 7,\n                    \"presellDeliverType\": 7,\n               \
+            \     \"settleType\": 1,\n                    \"invoiceType\": 1,\n  \
+            \                  \"consigneeAddressId\": 1,\n                    \"\
+            driverId\": 1,\n                    \"description\": \"订单编号：202505280000012\"\
+            ,\n                    \"skuList\": [\n                        {\n   \
+            \                         \"skuId\": 221713,\n                       \
+            \     \"name\": \"乙醇(无水乙醇)\",\n                            \"goodsId\"\
+            : 221203,\n                            \"storeCode\": \"1280340104702\"\
+            ,\n                            \"amount\": 40,\n                     \
+            \       \"limitMin\": 1,\n                            \"price\": 25.5,\n\
+            \                            \"specification\": \"AR2500ml/塑瓶\",\n   \
+            \                         \"warehouseId\": 2029,\n                   \
+            \         \"warehouseName\": \"平台仓\",\n                            \"\
+            description\": \"酒精\",\n                            \"remark\": \"\",\n\
+            \                            \"genOrder\": 0,\n                      \
+            \      \"expectDeliverDate\": \"\",\n                            \"specialQuality\"\
+            : \"\",\n                            \"goodsType\": \"\",\n          \
+            \                  \"brand\": \"西化\",\n                            \"\
+            modelGrade\": \"AR\"\n                        }\n                    ]\n\
+            \                }\n            ]\n        }\n```\n\n\n\n\n要求：\n\n\n\n\
+            - 任何情况都要输出 orderList 数组；只有一笔订单时，也必须以数组形式包裹。\n- 每个订单对象应包含 summary 描述和 json\
+            \ 结构，json 中的字段需与订单明细表一致。\n- 数据必须是严格的 JSON（双引号、无注释、无尾逗号）。\n- 如无有效订单数据，可返回\
+            \ \"orderList\": []，但仍需保持 ```xl-order 代码块格式。"
         - id: c98048a3-a74d-4705-848f-7a49c58d4179
           role: user
           text: /
@@ -994,11 +1041,11 @@ workflow:
       height: 212
       id: 1762395530294-iteration
       position:
-        x: 2491.5239956850824
-        y: -179.78192562330514
+        x: 2518.2418644354234
+        y: -252.9656530698911
       positionAbsolute:
-        x: 2491.5239956850824
-        y: -179.78192562330514
+        x: 2518.2418644354234
+        y: -252.9656530698911
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1019,8 +1066,8 @@ workflow:
         x: 60
         y: 82
       positionAbsolute:
-        x: 2551.5239956850824
-        y: -97.78192562330514
+        x: 2578.2418644354234
+        y: -170.9656530698911
       selectable: false
       sourcePosition: right
       targetPosition: left
@@ -1029,12 +1076,15 @@ workflow:
       zIndex: 1002
     - data:
         dataset_ids:
-        - +sFyT6wbvnSn3jjp5ge9YKBCznttHuFWhr4Axt8lql8iwXykrqh9XmrFGPvSuWT5
+        - 2G/4bXdRctIqCGTNEGrween70F7T1M9FbIDV1m7Uk3NcMJ8u4zx/idc5LVMiPDmU
         isInIteration: true
         iteration_id: 1762395530294-iteration
         multiple_retrieval_config:
-          reranking_enable: false
-          reranking_mode: weighted_score
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: netease-youdao/bce-reranker-base_v1
+            provider: langgenius/siliconflow/siliconflow
           top_k: 3
           weights:
             keyword_setting:
@@ -1048,7 +1098,7 @@ workflow:
         - item
         retrieval_mode: multiple
         selected: false
-        title: 商品信息检索
+        title: 内部商品档案
         type: knowledge-retrieval
       height: 90
       id: '1762395530294'
@@ -1057,8 +1107,8 @@ workflow:
         x: 16
         y: 65
       positionAbsolute:
-        x: 2507.5239956850824
-        y: -114.78192562330514
+        x: 2534.2418644354234
+        y: -187.9656530698911
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1117,9 +1167,9 @@ workflow:
       width: 242
     - data:
         dataset_ids:
-        - jnCj7KYoMO2IKL0/Y0BB1sTp0hLYQCK3UHNxDcv4BWea7ZBneiWoaHHHGdMcLCBu
+        - PxZAJvZnROtuS977GuEcppb+5Q9xThPyqpvZElkj0itugni4t1fwm2p+yuRXmSkV
         multiple_retrieval_config:
-          reranking_enable: false
+          reranking_enable: true
           reranking_mode: reranking_model
           reranking_model:
             model: netease-youdao/bce-reranker-base_v1
@@ -1131,16 +1181,16 @@ workflow:
         - customerlist
         retrieval_mode: multiple
         selected: false
-        title: 客户业务关系
+        title: 客户映射关系
         type: knowledge-retrieval
       height: 90
       id: '1762400638596'
       position:
-        x: 2541.1844695524255
-        y: 67.95034081289933
+        x: 2542.3461160198312
+        y: 72.59692668252384
       positionAbsolute:
-        x: 2541.1844695524255
-        y: 67.95034081289933
+        x: 2542.3461160198312
+        y: 72.59692668252384
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1148,7 +1198,7 @@ workflow:
       width: 242
     - data:
         dataset_ids:
-        - dD6nt3b0wm34a1db83pGiaM4EEFX92hI4U7d1jhOkKFlTlCuKhj3LCjj67gKJcoW
+        - zXsgfipmfQMgw0/o6ojJbaJUvxq+mawxA8INl14PpJaAIgH692814t6RtEXkMnjV
         multiple_retrieval_config:
           reranking_enable: true
           reranking_mode: reranking_model
@@ -1167,11 +1217,11 @@ workflow:
       height: 90
       id: '1762401118434'
       position:
-        x: 2559.9082502893298
-        y: 190.8638610754693
+        x: 2532.1073388903733
+        y: 205.7607987933589
       positionAbsolute:
-        x: 2559.9082502893298
-        y: 190.8638610754693
+        x: 2532.1073388903733
+        y: 205.7607987933589
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1378,41 +1428,11 @@ workflow:
       height: 114
       id: '1762938561146'
       position:
-        x: 1671.0677150523456
-        y: -49.0072724271177
+        x: 1678.0533501086456
+        y: 227.26408071499537
       positionAbsolute:
-        x: 1671.0677150523456
-        y: -49.0072724271177
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 242
-    - data:
-        dataset_ids:
-        - PxZAJvZnROtuS977GuEcppb+5Q9xThPyqpvZElkj0itugni4t1fwm2p+yuRXmSkV
-        multiple_retrieval_config:
-          reranking_enable: true
-          reranking_mode: reranking_model
-          reranking_model:
-            model: netease-youdao/bce-reranker-base_v1
-            provider: langgenius/siliconflow/siliconflow
-          top_k: 4
-        query_variable_selector:
-        - start
-        - sys.query
-        retrieval_mode: multiple
-        selected: false
-        title: 客户映射关系
-        type: knowledge-retrieval
-      height: 90
-      id: '1762940792363'
-      position:
-        x: 1353.2096468584257
-        y: -92.72226184398838
-      positionAbsolute:
-        x: 1353.2096468584257
-        y: -92.72226184398838
+        x: 1678.0533501086456
+        y: 227.26408071499537
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1422,7 +1442,7 @@ workflow:
         cases:
         - case_id: 'true'
           conditions:
-          - comparison_operator: contains
+          - comparison_operator: empty
             id: 8c3d9a64-649c-4377-a093-31c7b0def403
             value: ''
             varType: array[file]
@@ -1431,24 +1451,199 @@ workflow:
             - files
           id: 'true'
           logical_operator: and
-        selected: true
+        - case_id: 88961e17-cac2-4227-b81a-3d3be1811abc
+          conditions:
+          - comparison_operator: not empty
+            id: 35508dae-274c-4225-b53c-6cd4e6484e76
+            sub_variable_condition:
+              case_id: 78ee0bb4-f70d-4458-813a-fbdb861724d1
+              conditions:
+              - comparison_operator: is
+                id: b524e84f-115d-412a-823e-576cc4fb65dc
+                key: mime_type
+                value: pdf
+                varType: string
+              logical_operator: and
+            value: ''
+            varType: array[file]
+            variable_selector:
+            - sys
+            - files
+          - comparison_operator: contains
+            id: f398e160-5390-4dac-9e86-c3649d076100
+            sub_variable_condition:
+              case_id: 68e1e243-c59d-4324-91e3-710810d719bf
+              conditions:
+              - comparison_operator: contains
+                id: eb6f7138-5f17-407f-b40e-2599677c5be4
+                key: extension
+                value: pdf
+                varType: string
+              - comparison_operator: in
+                id: d15935a9-397e-47ed-a791-b98bf2544dd6
+                key: type
+                value:
+                - image
+                varType: string
+              logical_operator: or
+            value: ''
+            varType: array[file]
+            variable_selector:
+            - sys
+            - files
+          id: 88961e17-cac2-4227-b81a-3d3be1811abc
+          logical_operator: and
+        - case_id: 811687bf-6678-4ca6-aff8-a1c878a822fc
+          conditions:
+          - comparison_operator: not contains
+            id: 23003665-227f-4abc-b37e-c6d48d037e6b
+            sub_variable_condition:
+              case_id: ac0011d8-654c-4774-8b31-602663cacf42
+              conditions:
+              - comparison_operator: is
+                id: ec94fea5-f057-493f-8a3b-749d5488e6da
+                key: extension
+                value: .pdf
+                varType: string
+              - comparison_operator: in
+                id: e09d0241-1bdb-429d-9bdd-8bf573f4a1a1
+                key: type
+                value:
+                - image
+                varType: string
+              logical_operator: or
+            value: ''
+            varType: array[file]
+            variable_selector:
+            - sys
+            - files
+          id: 811687bf-6678-4ca6-aff8-a1c878a822fc
+          logical_operator: and
+        selected: false
         title: 条件分支 2
         type: if-else
-      height: 124
+      height: 342
       id: '1762997677438'
       position:
-        x: 748.4818148169903
-        y: -62.63015440338604
+        x: 416.6427784628464
+        y: -6.4523924512724875
       positionAbsolute:
-        x: 748.4818148169903
-        y: -62.63015440338604
-      selected: true
+        x: 416.6427784628464
+        y: -6.4523924512724875
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - sys
+        - files
+      height: 92
+      id: '1762998652862'
+      position:
+        x: 782.8849672887703
+        y: 190.8638610754693
+      positionAbsolute:
+        x: 782.8849672887703
+        y: 190.8638610754693
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        code: "def main(query: str, image_text: str, file_text: list) -> dict:\n \
+          \   \"\"\"\n    合并用户输入的文本、图片文本和文件文本，输出为markdown格式\n    不同的输入相互独立，每个部分独立显示\n\
+          \    \"\"\"\n    sections = []\n    \n    # 处理用户输入文本\n    if query and query.strip():\n\
+          \        sections.append(\"【用户输入文本】\\n\\n\" + query.strip())\n    \n   \
+          \ # 处理图片文本\n    if image_text and image_text.strip():\n        sections.append(\"\
+          【图片文本】\\n\\n\" + image_text.strip())\n    \n    # 处理文件文本（数组格式）\n    if file_text\
+          \ and isinstance(file_text, list):\n        file_contents = []\n       \
+          \ for idx, text in enumerate(file_text, 1):\n            if text and str(text).strip():\n\
+          \                file_contents.append(str(text).strip())\n        \n   \
+          \     if file_contents:\n            # 如果多个文件，用分隔符分开\n            if len(file_contents)\
+          \ > 1:\n                file_text_combined = \"\\n\\n---\\n\\n\".join(\n\
+          \                    f\"文件{idx}:\\n{content}\" \n                    for\
+          \ idx, content in enumerate(file_contents, 1)\n                )\n     \
+          \       else:\n                file_text_combined = file_contents[0]\n \
+          \           \n            sections.append(\"【文件文本】\\n\\n\" + file_text_combined)\n\
+          \    \n    # 合并所有部分，用空行分隔\n    result = \"\\n\\n\".join(sections) if sections\
+          \ else \"\"\n    \n    return {\"result\": result}"
+        code_language: python3
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 文本合并
+        type: code
+        variables:
+        - value_selector:
+          - sys
+          - query
+          value_type: string
+          variable: query
+        - value_selector:
+          - llm
+          - text
+          value_type: string
+          variable: image_text
+        - value_selector:
+          - '1762998652862'
+          - text
+          value_type: array[string]
+          variable: file_text
+      height: 52
+      id: '1763002619293'
+      position:
+        x: 1395.82653670969
+        y: 227.26408071499537
+      positionAbsolute:
+        x: 1395.82653670969
+        y: 227.26408071499537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        dataset_ids:
+        - Mkn/PfyfL9+wI7qqOauQjPyw2ISVIpHZz7b4fE4fgZSYemDB4ylvRLHg4F2Yx10c
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: reranking_model
+          reranking_model:
+            model: netease-youdao/bce-reranker-base_v1
+            provider: langgenius/siliconflow/siliconflow
+          top_k: 4
+        query_variable_selector:
+        - '1761896534199'
+        - structured_output
+        - goodslist
+        retrieval_mode: multiple
+        selected: false
+        title: 客户商品映射表
+        type: knowledge-retrieval
+      height: 90
+      id: '1763027761466'
+      position:
+        x: 2532.1073388903733
+        y: -36.60923866630904
+      positionAbsolute:
+        x: 2532.1073388903733
+        y: -36.60923866630904
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 242
     viewport:
-      x: -239.6378097677241
-      y: 221.7748998684467
-      zoom: 0.539275372864492
+      x: 207.59577329570368
+      y: 230.1236349030437
+      zoom: 0.34895966204729234
   rag_pipeline_variables: []
